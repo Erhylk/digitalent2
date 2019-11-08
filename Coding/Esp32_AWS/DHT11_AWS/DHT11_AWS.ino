@@ -76,6 +76,20 @@ void setup() {
 void loop() {
     float h = dht.readHumidity();
     float t = dht.readTemperature();
+
+   //Convert float to string
+    String hh = String(h);
+    String tt = String(t);
+
+    
+    //Convert to JSON
+    String message = "{ \"Device_ID\": \"ESP32\", \"Humidity\": \"" + hh + "\", \"Temperature\": \""+ tt +"\"}";
+    
+    Serial.print("JSON Message =");
+    Serial.println(message);
+    
+    //convert string to char
+    const char * msg = message.c_str();
    
     if(msgReceived == 1)
     {
@@ -89,7 +103,7 @@ void loop() {
     }
     else
     {
-        sprintf(payload,"Humidity:%f  Temperature:%f'C",h,t); // Create the payload for publishing
+        sprintf(payload,"%s",msg); // Create the payload for publishing
        
         if(hornbill.publish(TOPIC_NAME,payload) == 0)   // Publish the message(Temp and humidity)
         {        
@@ -105,4 +119,5 @@ void loop() {
        
     tick++;
     }
+    
 }

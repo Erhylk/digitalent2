@@ -69,6 +69,7 @@ void loop(){
             // and a content-type so the client knows what's coming, then a blank line:
             client.println("HTTP/1.1 200 OK");
             client.println("Content-type:text/html");
+//            client.println("Access-Control-Allow-Origin:*");
             client.println("Connection: close");
             client.println();
 
@@ -76,7 +77,8 @@ void loop(){
             client.println("<!DOCTYPE html><html>");
             client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
             client.println("<link rel=\"icon\" href=\"data:,\">");
-						client.println("<link rel=\"stylesheet\" href=\"https://raw.githubusercontent.com/Erhylk/digitalent2/master/Coding/ESP32_PwmSlider/style.css\">");
+//						client.println("<link rel=\"stylesheet\" href=\"https://raw.githubusercontent.com/Erhylk/digitalent2/master/Coding/ESP32_PwmSlider/style.css\" type=\"text/css\">");
+            client.println("<style>*{margin:0;padding:0}body{background:#009688;color:#efefef;text-shadow:2px 1px orange;width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:\"Trebuchet MS\",Arial}.slider{margin-top:10px;width:300px;-webkit-appearance:none;height:10px;border-radius:5px;background:#d3d3d3;outline:0;-webkit-transition:.2s;transition:opacity .2s;opacity:.9;box-shadow:0 2px 2px rgba(9,9,9,.3)}.slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:30px;height:30px;border-radius:50%;border:4px solid orange;background:#ff0;cursor:pointer;box-shadow:0 2px 2px rgba(9,9,9,.3)}.slider::-moz-range-thumb{width:30px;height:30px;border-radius:50%;border:4px solid orange;background:#ff0;cursor:pointer;box-shadow:0 2px 2px rgba(9,9,9,.3)}h1,p,svg{padding:8px 5px}svg{fill:#000;width:100px;height:100px}path.led{fill:#ff0}</style>");
             client.println("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>");
                      
             // Web Page

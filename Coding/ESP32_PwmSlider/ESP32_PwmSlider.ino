@@ -76,7 +76,7 @@ void loop(){
             client.println("<!DOCTYPE html><html>");
             client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
             client.println("<link rel=\"icon\" href=\"data:,\">");
-						client.println("<link rel=\"stylesheet\" href=\"https://raw.githubusercontent.com/Erhylk/digitalent2/master/Coding/ESP32_PwmSlider/style.css\"");
+						client.println("<link rel=\"stylesheet\" href=\"https://raw.githubusercontent.com/Erhylk/digitalent2/master/Coding/ESP32_PwmSlider/style.css\">");
             client.println("<script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>");
                      
             // Web Page

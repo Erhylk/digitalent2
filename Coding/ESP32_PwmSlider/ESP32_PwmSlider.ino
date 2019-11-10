@@ -1,5 +1,5 @@
 #include <WiFi.h>
-#include "style.css"
+//#include "style.css"
 
 // GPIO the LED is attached to
 static const int ledPin = 2;

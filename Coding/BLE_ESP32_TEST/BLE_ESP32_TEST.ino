@@ -25,19 +25,30 @@ class MyServerCallbacks: public BLEServerCallbacks {
 class MyCallbacks: public BLECharacteristicCallbacks {
     void onWrite(BLECharacteristic *pCharacteristic) {
       std::string rxValue = pCharacteristic->getValue();
+      
       if (rxValue.length() > 0) {
         Serial.println("*********");
         Serial.print("Received Value: ");
-        for (int i = 0; i < rxValue.length(); i++) { Serial.print(rxValue[i]); } Serial.println();
-        if (rxValue.find("ON") != -1) { Serial.println("Turning ON!"); digitalWrite(LED, HIGH); } else if (rxValue.find("OFF") != -1) { Serial.println("Turning OFF!"); digitalWrite(LED, LOW); } Serial.println(); Serial.println("*********"); } } }; void setup() { Serial.begin(115200); pinMode(LED, OUTPUT); // Create the BLE Device 
-        BLEDevice::init("ESP32 UART Test"); //ATUR NAMA BLUETOOTH YANG ANDA INGINKAN
+        
+        for (int i = 0; i < rxValue.length(); i++) { 
+          Serial.print(rxValue[i]); 
+          } 
+          Serial.println();
+        if (rxValue.find("ON") != -1) { Serial.println("Turning ON!"); digitalWrite(LED, HIGH); } 
+        else if (rxValue.find("OFF") != -1) { Serial.println("Turning OFF!"); digitalWrite(LED, LOW); } Serial.println(); Serial.println("*********"); } } }; 
+        
+void setup() { 
+  Serial.begin(115200); pinMode(LED, OUTPUT); // Create the BLE Device 
+  BLEDevice::init("ESP32 UART Test"); //ATUR NAMA BLUETOOTH YANG ANDA INGINKAN
+        
         // Create the BLE Server 
-        BLEServer *pServer = BLEDevice::createServer(); pServer->setCallbacks(new MyServerCallbacks());
+  BLEServer *pServer = BLEDevice::createServer(); 
+  pServer->setCallbacks(new MyServerCallbacks());
 
         // Create the BLE Service
   BLEService *pService = pServer->createService(SERVICE_UUID);
 
-  // Create a BLE Characteristic
+        // Create a BLE Characteristic
   pCharacteristic = pService->createCharacteristic(
                       CHARACTERISTIC_UUID_TX,
                       BLECharacteristic::PROPERTY_NOTIFY
@@ -62,6 +73,7 @@ void loop() {
   if (deviceConnected) {
     // Fabricate some arbitrary junk for now...
     txValue = analogRead(readPin) / 3.456; // This could be an actual sensor reading!
+    
         // Let's convert the value to a char array:
     char txString[8]; // make sure this is big enuffz
     dtostrf(txValue, 1, 2, txString); // float_val, min_width, digits_after_decimal, char_buffer

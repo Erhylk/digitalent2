@@ -9,13 +9,14 @@
 BLECharacteristic * pCharacteristic;
 
 bool deviceConnected = false;
- const int LED = 25;  // Could be different depending on the dev board.  I used the DO32 ESP32 dev board.
+ const int LED = 2;  // Could be different depending on the dev board.  I used the DO32 ESP32 dev board.
 
  /*
   * Definition of DHT11
   */
  #define DHTPIN 23 // DHT11 data pin
  #define DHTTYPE DHT11 // sets the sensor type, in case DHT11
+ #define setCallbacks;
 
  DHT dht (DHTPIN, DHTTYPE);
 
@@ -43,12 +44,15 @@ class MyCallbacks: public BLECharacteristicCallbacks {
      void onWrite (BLECharacteristic * pCharacteristic) {
        std :: string rxValue = pCharacteristic-> getValue ();
        Serial.println (rxValue [0]);
+       
+     
 
 if (rxValue.length ()> 0) {
          Serial.println ("*********");
          Serial.print ("Received Value:");
 
-for (int i = 0; i  setCallbacks (new MyServerCallbacks ());
+  for (int i = 0; i;  
+    setCallbacks (new MyServerCallbacks ());
 
 // Create the UART service
    BLEService * pService = pServer-> createService (SERVICE_UUID);
@@ -64,8 +68,7 @@ pCharacteristic-> addDescriptor (new BLE2902 ());
 // creates a BLE characteristic to receive the data
    BLECharacteristic * pCharacteristic = pService-> createCharacteristic (
                                           CHARACTERISTIC_UUID_RX,
-                                          BLECharacteristic :: PROPERTY_WRITE
-                                        );
+                                          BLECharacteristic :: PROPERTY_WRITE);
 pCharacteristic-> setCallbacks (new MyCallbacks ());
 
 // Start the service
@@ -75,6 +78,8 @@ pCharacteristic-> setCallbacks (new MyCallbacks ());
    pServer-> getAdvertising () -> start ();
    Serial.println ("Waiting for a client to connect ...");
  }
+     }
+};
 
 void loop () {
    if (deviceConnected) {
@@ -112,7 +117,7 @@ void loop () {
      Serial.println ("***");
    }
    delay (1000);
- }
+}
 
 
 

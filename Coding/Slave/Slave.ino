@@ -1,4 +1,7 @@
+//#include <SPI.h>
+
 #include <SPI.h>
+
 char buff [100];
 volatile byte index1;
 volatile bool receivedone;

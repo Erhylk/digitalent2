@@ -1,8 +1,9 @@
 /* . . . https://www.nyebarilmu.com . . . */
  
 int TURBINE;      //pengukuran SINYAL data yang bersifat incremental
-int HSensor = 2; //nama alias pada pin 2
+int HSensor = 1; //nama alias pada pin 2
 int Calc;
+//int count;
  
 void speedrpm ()    //fungsi penghitungan dan interrupt
 {
@@ -23,6 +24,8 @@ sei(); //perintah aktifnya mode interrupt
 delay (1000); //nilai delay 1 detik
 cli(); //perintah untuk matinya program interrupt
 Calc = (TURBINE * 60 / 98); //Pulsa * 60 / 98
+//count = (Calc / 60 
+
  
 //satuan FLOW RATE benda cair yaitu L / hour
  
